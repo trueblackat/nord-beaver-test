@@ -9,4 +9,7 @@ $color-white: #fff;
 
 $color-background: $color-dark;
 $color-text: $color-white;
-$color-text-secondary: rgba($color-text, .5);
+$color-text-op-80: rgba($color-text, .80);
+$color-text-op-50: rgba($color-text, .5);
+
+$base-animation: ease-in-out 0.2s;

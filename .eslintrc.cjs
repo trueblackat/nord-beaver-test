@@ -36,6 +36,8 @@ module.exports = {
     'vuejs-accessibility/click-events-have-key-events': 'off',
     'vuejs-accessibility/form-control-has-label': 'off',
     'import/no-unresolved': 'off', // странная ошибка eslint
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "warn", // https://github.com/typescript-eslint/tslint-to-eslint-config/issues/856
   },
   "ignorePatterns": ["dist/**/*", "node_modules/**/*", "vite.config.ts"],
   overrides: [

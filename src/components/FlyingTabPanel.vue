@@ -66,7 +66,7 @@ const props = defineProps<{ tabs: ITab[] }>();
     background: $color-gray-2;
     cursor: pointer;
     outline: none;
-    color: $color-text-secondary;
+    color: $color-text-op-50;
     padding: 0;
     text-transform: uppercase;
     font-size: 24px;
@@ -85,8 +85,10 @@ const props = defineProps<{ tabs: ITab[] }>();
       flex-shrink: 0;
       flex-grow: unset;
       width: $header-height;
-      color: $color-text-secondary;
+      color: $color-text-op-50;
       font-size: 0;
+      transition: background-color $base-animation;
+
     }
   }
 

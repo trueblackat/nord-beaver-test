@@ -3,8 +3,12 @@
 @import "variables";
 @import "helpers";
 
+* {
+  user-select: none;
+}
+
 body {
-  font-family: $font-family-jetbrains;
+  font-family: $font-family-archivo;
   color: $color-text;
 
   background: lightgrey;
