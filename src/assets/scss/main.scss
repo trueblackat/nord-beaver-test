@@ -1,1 +1,11 @@
 @import "vendors";
+@import "fonts";
+@import "variables";
+@import "helpers";
+
+body {
+  font-family: $font-family-jetbrains;
+  color: $color-text;
+
+  background: lightgrey;
+}
