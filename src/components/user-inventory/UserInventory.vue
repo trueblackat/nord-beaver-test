@@ -6,11 +6,11 @@
         :key="filterButton.type"
         :class="[
           'user-inventory-filter-button',
-          { 'user-inventory-filter-button--current': filterButton.type === currentFilterType },
+          { 'user-inventory-filter-button--current': filterButton.type === currentFilter.type },
         ]"
         :title="filterButton.label"
         type="button"
-        @click="setCurrentFilterType(filterButton.type)"
+        @click="setCurrentFilter(filterButton)"
       >
         <svg-icon
           class="untouchable"
@@ -26,23 +26,46 @@
         {{ currentFilter.label }}
       </div>
 
-      <div class="user-inventory__board" />
+      <user-inventory-board :items="filteredInvertoryItems" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { filterButtons } from './constants.ts';
+import UserInventoryBoard from './UserInventoryBoard.vue';
+import { getInventoryEndpoint } from '../../api/endpoints/inventory.ts';
+import { IInventoryItem } from '../../types/inventory.ts';
 import { EFilterTypes } from '../../types/filters.ts';
 
-const currentFilterType = ref(filterButtons[0].type);
-const setCurrentFilterType = (filterType: EFilterTypes) => {
-  currentFilterType.value = filterType;
+const props = defineProps<{ caseProp: string }>();
+
+// Filter state
+const currentFilter = ref(filterButtons[0]);
+const setCurrentFilter = (filter) => {
+  currentFilter.value = filter;
 };
-const currentFilter = computed(() => filterButtons.find(
-  (filterButton) => filterButton.type === currentFilterType.value,
+
+const inventoryItems = ref([] as IInventoryItem[]);
+const getInventory = async () => {
+  try {
+    if (!props.caseProp) throw new Error('Case param is required!');
+
+    const { inventory } = await getInventoryEndpoint(props.caseProp);
+
+    inventoryItems.value = inventory;
+  } catch (e) {
+    console.error(e);
+  }
+};
+const filteredInvertoryItems = computed(() => inventoryItems.value.filter(
+  (item) => [EFilterTypes.ALL, item.type].includes(currentFilter.value.type),
 ));
+
+onMounted(() => {
+  getInventory();
+});
 </script>
 
 <style lang="scss">
@@ -63,7 +86,7 @@ const currentFilter = computed(() => filterButtons.find(
   }
 
   &__body {
-    padding: 13px 19px 16px 15px;
+    padding: 12px 18px 15px 14px;
     flex-grow: 1;
   }
 
@@ -76,8 +99,6 @@ const currentFilter = computed(() => filterButtons.find(
     text-overflow: ellipsis;
     margin-bottom: 10px;
   }
-
-  &__board { grid-area: board; }
 }
 
 .user-inventory-filter-button {

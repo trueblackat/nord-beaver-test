@@ -17,7 +17,7 @@ export const filterButtons = [
     label: 'Armor',
   },
   {
-    type: EFilterTypes.WEAPONS,
+    type: EFilterTypes.WEAPON,
     icon: 'weapons',
     width: '33px',
     height: '32px',

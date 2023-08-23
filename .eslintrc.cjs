@@ -37,6 +37,7 @@ module.exports = {
     'vuejs-accessibility/form-control-has-label': 'off',
     'import/no-unresolved': 'off', // странная ошибка eslint
     "no-shadow": "off",
+    'import/no-extraneous-dependencies': 'off',
     "@typescript-eslint/no-shadow": "warn", // https://github.com/typescript-eslint/tslint-to-eslint-config/issues/856
   },
   "ignorePatterns": ["dist/**/*", "node_modules/**/*", "vite.config.ts"],
