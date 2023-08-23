@@ -1,5 +1,8 @@
 <template>
-  <div class="inventory-item">
+  <div
+    v-tooltip="item.name"
+    class="inventory-item"
+  >
     <img
       :class="[
         'inventory-item__image',
