@@ -12,7 +12,7 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import FlyingTabPanel from '@/components/FlyingTabPanel.vue';
 import UserInventory from '@/components/user-inventory/UserInventory.vue';
-import { ITab } from '../types/tabs.ts';
+import { ITab } from '@/types/tabs.ts';
 
 const router = useRouter();
 const props = defineProps<{caseProp?: string}>();
@@ -29,8 +29,10 @@ const tabs: ITab[] = [
   },
 ];
 
+const allowedCases = ['1', '2', '3'];
+
 onMounted(async () => {
-  if (!props.caseProp || !['1', '2', '3'].includes(props.caseProp)) {
+  if (!props.caseProp || !allowedCases.includes(props.caseProp)) {
     await router.push({ name: 'MainPage', query: { case: '1' } });
   }
 

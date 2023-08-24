@@ -1,5 +1,5 @@
-import httpClient from '../httpClient.ts';
-import { IInventoryItem } from '../../types/inventory.ts';
+import httpClient from '@/api/httpClient.ts';
+import { IInventoryItem } from '@/types/inventory.ts';
 
 type TInventoriesResponse = {
   data: {

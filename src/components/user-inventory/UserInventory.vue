@@ -43,15 +43,15 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
+import { getInventoryEndpoint } from '@/api/endpoints/inventory.ts';
+import { IInventoryItem } from '@/types/inventory.ts';
+import { EFilterTypes, IFilter } from '@/types/filters.ts';
+import CustomScroll from '@/components/common/CustomScroll.vue';
+import { getScrollDataFromElement } from '@/helpers/scroll.ts';
 import { filterButtons } from './constants.ts';
 import UserInventoryBoard from './UserInventoryBoard.vue';
-import { getInventoryEndpoint } from '../../api/endpoints/inventory.ts';
-import { IInventoryItem } from '../../types/inventory.ts';
-import { EFilterTypes, IFilter } from '../../types/filters.ts';
-import CustomScroll from '../common/CustomScroll.vue';
-import { getScrollDataFromElement } from '../../helpers/scroll.ts';
 
-const props = defineProps<{ caseProp: string }>();
+const props = defineProps<{ caseProp?: string }>();
 
 // Filter state
 const currentFilter = ref(filterButtons[0]);

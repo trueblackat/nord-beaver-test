@@ -25,8 +25,8 @@
 import {
   computed, nextTick, ref, toRefs, watch,
 } from 'vue';
-import { IInventoryItem } from '../../types/inventory.ts';
-import getModuledCount from '../../helpers/getModuledCount.ts';
+import { IInventoryItem } from '@/types/inventory.ts';
+import getModuledCount from '@/helpers/getModuledCount.ts';
 import InventoryItem from './InventoryItem.vue';
 
 const props = defineProps<{

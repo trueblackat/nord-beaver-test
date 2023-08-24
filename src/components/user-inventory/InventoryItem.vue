@@ -3,18 +3,16 @@
     v-tooltip="item.name"
     class="inventory-item"
   >
-    <img
+    <div
       :class="[
         'inventory-item__image',
         imageBacklightClass,
-        'untouchable',
         {
           'inventory-item__image--darkened': item.cooldown,
         },
       ]"
-      :src="item.imageUrl"
-      :alt="item.name"
-    >
+      :style="{ backgroundImage: `url(${item.imageUrl})` }"
+    />
 
     <div
       v-if="chargesLabel"
@@ -42,9 +40,9 @@
 
 <script lang="ts" setup>
 import { computed, ref, toRefs } from 'vue';
-import { IInventoryItem } from '../../types/inventory.ts';
-import { EFilterTypes } from '../../types/filters.ts';
-import counter from '../../helpers/counter.ts';
+import { IInventoryItem } from '@/types/inventory.ts';
+import { EFilterTypes } from '@/types/filters.ts';
+import counter from '@/helpers/counter.ts';
 
 const props = defineProps<{ item: IInventoryItem }>();
 const { item } = toRefs(props);
@@ -78,7 +76,9 @@ if (item.value.cooldown) {
   &__image {
     height: 100%;
     width: 100%;
-    object-fit: contain;
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
 
     &--blue-backlight {
       @include itemsDropShadow($color-blue);

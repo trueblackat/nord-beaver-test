@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ITab } from '../types/tabs.ts';
+import { ITab } from '@/types/tabs.ts';
 
 const props = defineProps<{ tabs: ITab[] }>();
 </script>

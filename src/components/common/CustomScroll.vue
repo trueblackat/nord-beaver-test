@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { IScrollData } from '../../types/scroll.ts';
+import { IScrollData } from '@/types/scroll.ts';
 
 const props = defineProps<{
   scrollData: IScrollData;

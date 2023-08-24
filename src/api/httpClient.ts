@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const httpClient = axios.create({
-  baseURL: 'https://us-central1-seven-seven-bit-inhouse-helper.cloudfunctions.net',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
 export default httpClient;

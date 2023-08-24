@@ -1,4 +1,4 @@
-import { IScrollData } from '../types/scroll.ts';
+import { IScrollData } from '@/types/scroll.ts';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getScrollDataFromElement = (el: HTMLElement): IScrollData => ({
