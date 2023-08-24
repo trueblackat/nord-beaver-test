@@ -40,7 +40,6 @@ const thumbStyles = computed(() => ({
     top: 0;
     width: 3px;
     background: $color-light-gray-2;
-    cursor: pointer;
   }
 }
 </style>

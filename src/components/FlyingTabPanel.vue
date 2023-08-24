@@ -84,8 +84,6 @@ const props = defineProps<{ tabs: ITab[] }>();
       width: $header-height;
       color: $color-text-op-50;
       font-size: 0;
-      transition: background-color $base-animation;
-
     }
   }
 

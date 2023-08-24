@@ -78,7 +78,7 @@ const filteredInvertoryItems = computed(() => inventoryItems.value.filter(
 
 // Scroll
 const scrollData = ref();
-const onBoardScroll = (el) => {
+const onBoardScroll = (el: HTMLElement) => {
   scrollData.value = getScrollDataFromElement(el);
 };
 

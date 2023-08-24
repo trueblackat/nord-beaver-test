@@ -7,55 +7,33 @@
   </flying-tab-panel>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import FlyingTabPanel from '@/components/FlyingTabPanel.vue';
 import UserInventory from '@/components/user-inventory/UserInventory.vue';
 import { ITab } from '../types/tabs.ts';
 
-export default defineComponent({
-  name: 'InventoryPage',
+const router = useRouter();
+const props = defineProps<{caseProp?: string}>();
 
-  components: {
-    FlyingTabPanel,
-    UserInventory,
+const isValidCase = ref(false);
+const tabs: ITab[] = [
+  {
+    label: 'Backpack',
+    current: true,
   },
-
-  props: {
-    caseProp: {
-      type: String,
-      default: null,
-    },
+  {
+    label: 'Nexus',
+    current: false,
   },
+];
 
-  data() {
-    return {
-      isValidCase: false,
-      tabs: Object.freeze([
-        {
-          label: 'Backpack',
-          current: true,
-        },
-        {
-          label: 'Nexus',
-          current: false,
-        },
-      ] as ITab[]),
-    };
-  },
+onMounted(async () => {
+  if (!props.caseProp || !['1', '2', '3'].includes(props.caseProp)) {
+    await router.push({ name: 'MainPage', query: { case: '1' } });
+  }
 
-  mounted() {
-    this.init();
-  },
-
-  methods: {
-    async init() {
-      if (!this.caseProp || !['1', '2', '3'].includes(this.caseProp)) {
-        await this.$router.push({ name: 'MainPage', query: { case: '1' } });
-      }
-
-      this.isValidCase = true;
-    },
-  },
+  isValidCase.value = true;
 });
 </script>

@@ -34,6 +34,7 @@ const props = defineProps<{
 }>();
 const { items } = toRefs(props);
 
+// Items count calculating
 const minRows = 8;
 const itemsPerRow = 5;
 const minItems = minRows * itemsPerRow;
