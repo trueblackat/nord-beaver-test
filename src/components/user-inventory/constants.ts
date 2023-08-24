@@ -21,13 +21,13 @@ export const filterButtons: IFilter[] = [
     icon: 'weapons',
     width: '33px',
     height: '32px',
-    label: 'Apons',
+    label: 'Weapons',
   },
   {
     type: EFilterTypes.MISC,
     icon: 'misc',
     width: '33px',
     height: '43px',
-    label: 'Weneous',
+    label: 'Miscellaneous',
   },
 ];
