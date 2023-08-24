@@ -103,10 +103,10 @@ if (item.value.cooldown) {
   &__charges-label {
     top: 0;
     left: 0;
-    font-size: 16px;
-    line-height: 21px;
-    width: 61px; // 65%
-    height: 36px; // 38%
+    font-size: vw(16px);
+    line-height: vw(21px);
+    width: 65%;
+    height: 38%;
     padding: 0 2px;
     position: absolute;
     background: linear-gradient(
@@ -124,8 +124,8 @@ if (item.value.cooldown) {
   &__count-label {
     right: 3px;
     bottom: -3px;
-    font-size: 17px;
-    line-height: 22px;
+    font-size: vw(17px);
+    line-height: vw(22px);
   }
 
   &__cooldown {
@@ -139,8 +139,8 @@ if (item.value.cooldown) {
     align-items: center;
     justify-content: center;
     gap: 6px;
-    font-size: 20px;
-    line-height: 22px;
+    font-size: vw(20px);
+    line-height: vw(22px);
   }
 }
 </style>

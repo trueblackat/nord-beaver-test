@@ -41,7 +41,6 @@ const props = defineProps<{ tabs: ITab[] }>();
 
 <style lang="scss">
 .flying-tab-panel {
-  width: 562px;
   background: $color-background;
 
   &__body {
@@ -69,7 +68,6 @@ const props = defineProps<{ tabs: ITab[] }>();
     padding: 0;
     text-transform: uppercase;
     font-size: 24px;
-    font-weight: 400;
 
     img {
       margin: 0 auto;
