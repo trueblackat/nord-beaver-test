@@ -1,7 +1,7 @@
-import { EFilterTypes } from '../../types/filters.ts';
+import { EFilterTypes, IFilter } from '../../types/filters.ts';
 
 // eslint-disable-next-line import/prefer-default-export
-export const filterButtons = [
+export const filterButtons: IFilter[] = [
   {
     type: EFilterTypes.ALL,
     icon: 'all',

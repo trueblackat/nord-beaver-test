@@ -26,7 +26,17 @@
         {{ currentFilter.label }}
       </div>
 
-      <user-inventory-board :items="filteredInvertoryItems" />
+      <div class="user-inventory__scroll-wrapper">
+        <user-inventory-board
+          :items="filteredInvertoryItems"
+          @update-scroll="onBoardScroll"
+        />
+
+        <custom-scroll
+          v-if="scrollData"
+          :scroll-data="scrollData"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -37,16 +47,19 @@ import { filterButtons } from './constants.ts';
 import UserInventoryBoard from './UserInventoryBoard.vue';
 import { getInventoryEndpoint } from '../../api/endpoints/inventory.ts';
 import { IInventoryItem } from '../../types/inventory.ts';
-import { EFilterTypes } from '../../types/filters.ts';
+import { EFilterTypes, IFilter } from '../../types/filters.ts';
+import CustomScroll from '../common/CustomScroll.vue';
+import { getScrollDataFromElement } from '../../helpers/scroll.ts';
 
 const props = defineProps<{ caseProp: string }>();
 
 // Filter state
 const currentFilter = ref(filterButtons[0]);
-const setCurrentFilter = (filter) => {
+const setCurrentFilter = (filter: IFilter) => {
   currentFilter.value = filter;
 };
 
+// Inventory list
 const inventoryItems = ref([] as IInventoryItem[]);
 const getInventory = async () => {
   try {
@@ -62,6 +75,12 @@ const getInventory = async () => {
 const filteredInvertoryItems = computed(() => inventoryItems.value.filter(
   (item) => [EFilterTypes.ALL, item.type].includes(currentFilter.value.type),
 ));
+
+// Scroll
+const scrollData = ref();
+const onBoardScroll = (el) => {
+  scrollData.value = getScrollDataFromElement(el);
+};
 
 onMounted(() => {
   getInventory();
@@ -88,6 +107,14 @@ onMounted(() => {
   &__body {
     padding: 12px 18px 15px 14px;
     flex-grow: 1;
+  }
+
+  &__scroll-wrapper {
+    position: relative;
+
+    .custom-scroll {
+      right: -9px;
+    }
   }
 
   &__filter-label {
@@ -120,5 +147,4 @@ onMounted(() => {
     color: $color-text;
   }
 }
-
 </style>

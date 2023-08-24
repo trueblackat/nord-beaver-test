@@ -43,7 +43,6 @@ const props = defineProps<{ tabs: ITab[] }>();
 .flying-tab-panel {
   width: 562px;
   background: $color-background;
-  font-family: $font-family-archivo;
 
   &__body {
     border: 1px solid $color-black;

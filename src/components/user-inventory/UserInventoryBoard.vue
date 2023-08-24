@@ -1,8 +1,10 @@
 <template>
-  <div class="user-inventory-board">
-    <template
-      v-for="(item, index) in resultItems"
-    >
+  <div
+    ref="board"
+    class="user-inventory-board"
+    @scroll="onUpdateScroll"
+  >
+    <template v-for="(item, index) in resultItems">
       <inventory-item
         v-if="item"
         :key="`item-${item.id}`"
@@ -20,7 +22,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, toRefs } from 'vue';
+import {
+  computed, nextTick, ref, toRefs, watch,
+} from 'vue';
 import { IInventoryItem } from '../../types/inventory.ts';
 import getModuledCount from '../../helpers/getModuledCount.ts';
 import InventoryItem from './InventoryItem.vue';
@@ -33,11 +37,22 @@ const { items } = toRefs(props);
 const minRows = 8;
 const itemsPerRow = 5;
 const minItems = minRows * itemsPerRow;
-
 const resultItems = computed(() => [
   ...items.value,
   ...Array(getModuledCount(items.value.length, minItems, itemsPerRow)),
 ]);
+
+// Scrolling
+const board = ref();
+const emits = defineEmits(['update-scroll']);
+const onUpdateScroll = async () => {
+  if (board.value) {
+    await nextTick();
+    emits('update-scroll', board.value);
+  }
+};
+
+watch(items, () => { onUpdateScroll(); }, { immediate: true });
 </script>
 
 <style lang="scss">
@@ -46,7 +61,11 @@ const resultItems = computed(() => [
   flex-wrap: wrap;
   aspect-ratio: 5/8;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &__item {
     flex-shrink: 0;
